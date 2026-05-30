@@ -1,0 +1,24 @@
+:root {
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --primary: #008292;
+  --primary-text: #1a1a1a;
+  --tertiary-text: #757575;
+  --secondary-text: #474747;
+  --login-gradient-from: #f2f3f7;
+  --login-gradient-to: #d0f0f6;
+  --surface-muted: #eff6f7;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-text: var(--primary-text);
+  --color-tertiary-text: var(--tertiary-text);
+  --color-secondary-text: var(--secondary-text);
+  --color-login-gradient-from: var(--login-gradient-from);
+  --color-login-gradient-to: var(--login-gradient-to);
+  --color-surface-muted: var(--surface-muted);
+  --font-sans: var(--font-lexend);
+}

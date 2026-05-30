@@ -8,6 +8,8 @@
 
 **Input**: User description: "$ARGUMENTS"
 
+**Constitution**: Features MUST comply with `.specify/memory/constitution.md`. When a matching story exists in `docs/user-stories/`, align **BR-XX** / **SC-XX** identifiers or document deviations in _Assumptions_.
+
 ## User Scenarios & Testing _(mandatory)_
 
 <!--

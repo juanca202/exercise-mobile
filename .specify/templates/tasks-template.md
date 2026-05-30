@@ -8,7 +8,7 @@ description: "Task list template for feature implementation"
 
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: OPTIONAL unless the feature spec or `docs/user-stories/` requires them. When included, use Vitest + Testing Library, co-located `*.test.ts(x)` next to the module under `src/features/<feature>/` (see ADR-005 and constitution Principle IV).
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -20,10 +20,10 @@ description: "Task list template for feature implementation"
 
 ## Path Conventions
 
-- **Single project**: `src/`, `tests/` at repository root
-- **Web app**: `backend/src/`, `frontend/src/`
-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+- **This repo (default)**: `src/app/` (routes), `src/features/<feature>/`, `src/shared/`, `src/components/`
+- **Tests**: co-located with source under the same feature folder (not a parallel `tests/unit` tree)
+- **Other layouts**: only if plan.md documents an explicit exception with Complexity Tracking justification
+- Paths shown below are illustrative — replace with real paths from plan.md
 
 <!--
   ============================================================================

@@ -40,7 +40,19 @@
 
 _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-[Gates determined based on constitution file]
+Reference: `.specify/memory/constitution.md` (v1.0.0+). All items MUST pass or be listed in _Complexity Tracking_ with justification.
+
+| Gate               | Requirement                                                                |
+| ------------------ | -------------------------------------------------------------------------- |
+| Decision hierarchy | Plan aligns with MEMORY.md, Accepted ADRs, and spec/user-story BR-SC       |
+| Routing            | App Router only under `src/app/`; no `pages/`                              |
+| Structure          | Feature code under `src/features/<feature>/`; shared code in `src/shared/` |
+| Spec traceability  | User stories prioritized; BR/SC aligned or deviations documented           |
+| Stack              | Next 16, React 19, Tailwind, Base UI, Zustand per ADRs                     |
+| Scope              | Mocks/demo boundaries respected; no production IdP/API unless spec says so |
+| UI                 | Figma/DESIGN.md referenced when applicable                                 |
+| Quality            | `lint`, `test:run`, `build` planned; tests co-located if required by spec  |
+| Simplicity         | No extra dependencies/layers without Complexity Tracking entry             |
 
 ## Project Structure
 

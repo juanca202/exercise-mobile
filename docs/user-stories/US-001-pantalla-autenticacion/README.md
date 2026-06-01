@@ -12,7 +12,7 @@
 
 ## Referencias
 
-- **Diseño (Figma):** [Pantallas taller SDD — nodo de referencia](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-3167&m=dev) (archivo `7pt2W7JSic4ZoAVcgvQ5qD`, nodo `1-3167` en modo Dev).
+- **Diseño (Figma):** [Pantallas taller SDD — nodo de referencia](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1533&m=dev) (archivo `7pt2W7JSic4ZoAVcgvQ5qD`, nodo `36-1533` en modo Dev).
 
 ## Criterios de aceptación
 

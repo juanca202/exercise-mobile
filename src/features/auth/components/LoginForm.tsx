@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { type SubmitEvent, useState } from "react";
 
-import { AuthIcon } from "@/components/ui/auth-icon";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { AuthIcon } from "@/components/ui/AuthIcon";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 import { HOME_PATH } from "@/shared/constants/routes";
 
 import { useAuthStore } from "../lib/auth-store";
@@ -18,7 +18,7 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage(null);
 
@@ -77,7 +77,7 @@ export function LoginForm() {
               }
               onClick={() => setShowPassword((value) => !value)}
             >
-              <AuthIcon name="eye" size={20} />
+              <AuthIcon name="eye" />
             </button>
           </div>
           <p className="text-right text-xs leading-5 text-tertiary-text">
@@ -94,7 +94,7 @@ export function LoginForm() {
 
       <Button
         type="submit"
-        trailingIcon={<AuthIcon name="loginArrow" size={20} />}
+        endIcon={<AuthIcon name="login" />}
       >
         Iniciar sesión
       </Button>

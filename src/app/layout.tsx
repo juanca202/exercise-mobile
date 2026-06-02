@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Lexend } from "next/font/google";
+import { Geist_Mono, Lexend } from "next/font/google";
+
+import { AuthHydrator } from "@/features/auth/components/AuthHydrator";
 
 import "./globals.css";
 
@@ -8,9 +10,14 @@ const lexend = Lexend({
   subsets: ["latin"],
 });
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Banca demo",
-  description: "Demostración de banca web — autenticación",
+  title: "Banca web — Demostración",
+  description: "Demostración de banca web con autenticación mock",
 };
 
 export default function RootLayout({
@@ -19,9 +26,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${lexend.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-lexend)]">
-        <div className="root flex min-h-full flex-1 flex-col">{children}</div>
+    <html
+      lang="es"
+      className={`${lexend.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="flex min-h-full flex-col">
+        <AuthHydrator>
+          <div className="root flex min-h-full flex-1 flex-col">{children}</div>
+        </AuthHydrator>
       </body>
     </html>
   );

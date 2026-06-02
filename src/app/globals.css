@@ -6,8 +6,238 @@
   isolation: isolate;
 }
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* DESIGN.md §2 — paleta Banco Bolivariano */
+  --primary: #008292;
+  --primary-deep: #1b5255;
+  --primary-dark: #0b515c;
+  --primary-tint: #d0f0f6;
+  --primary-surface: #ebf3f9;
+  --primary-subtle: #e5ebee;
+  --primary-accent-light: #aacccc;
+  --tertiary: #757575;
+  --secondary: #474747;
+  --muted: #606060;
+  --label: #424242;
+  --charcoal: #333333;
+  --heading: #17191f;
+  --border: #ced4da;
+  --surface-muted: #f2f3f7;
+  --surface-accent: #eff6f7;
+  --surface-elevated: #ebf5f6;
+  --info: #0067ae;
+  --info-surface: #d1e4f0;
+  --ink: #181c1e;
+  --card-dark-from: #333333;
+  --card-dark-to: #1a1a1a;
+  --on-dark-muted: #e2e2e2;
+  --placeholder: #9f9f9f;
+
+  /* DESIGN.md §3 — tipografía */
+  --font-family-sans: var(--font-lexend), Lexend, Roboto, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --text-display: 0.75rem; /* 12px */
+  --text-display--line-height: 1;
+  --text-display--font-weight: 500;
+
+  --text-h2: 1.5rem; /* 24px */
+  --text-h2--line-height: 2rem; /* 32px */
+  --text-h2--font-weight: 700;
+
+  --text-h3: 1rem; /* 16px */
+  --text-h3--line-height: 1.5rem; /* 24px */
+  --text-h3--font-weight: 500;
+
+  --text-body: 0.875rem; /* 14px */
+  --text-body--line-height: 1.25rem; /* 20px */
+  --text-body--font-weight: 400;
+
+  --text-body-bold: 0.875rem;
+  --text-body-bold--line-height: 1.875rem; /* 30px */
+  --text-body-bold--font-weight: 600;
+
+  --text-button: 1rem; /* 16px */
+  --text-button--line-height: normal;
+  --text-button--font-weight: 500;
+
+  --text-button-sm: 0.875rem;
+  --text-button-sm--line-height: 1.25rem;
+  --text-button-sm--font-weight: 400;
+
+  --text-input: 0.8125rem; /* 13px — DESIGN 13.3px */
+  --text-input--line-height: normal;
+  --text-input--font-weight: 400;
+
+  --text-caption: 0.75rem; /* 12px */
+  --text-caption--line-height: 1.125rem; /* 18px */
+  --text-caption--font-weight: 400;
+
+  /* DESIGN.md §5 — espaciado (múltiplos de 4px) */
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-7: 1.75rem; /* 28px */
+  --space-8: 2rem; /* 32px */
+  --space-9: 2.25rem; /* 36px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-13: 3.25rem; /* 52px */
+
+  /* DESIGN.md §5 — border radius */
+  --radius-input: 0.5rem; /* 8px */
+  --radius-container-sm: 0.75rem; /* 12px */
+  --radius-modal: 1rem; /* 16px */
+  --radius-card: 1.25rem; /* 20px */
+  --radius-pill: 2.25rem; /* 36px */
+
+  /* DESIGN.md §5 — layout */
+  --container-max: 71.25rem; /* 1140px */
+  --container-padding-mobile: var(--space-3);
+  --container-padding-tablet: var(--space-4);
+  --container-padding-desktop: var(--space-6);
+
+  /* Mobile app — medidas de componente (Figma) */
+  --size-touch-min: 2.75rem; /* 44px — DESIGN §8 */
+  --size-button-login: 3.375rem; /* 54px */
+  --size-account-card-h: 9.625rem; /* 154px */
+  --size-account-card-w: 18.4375rem; /* 295px */
+  --size-nav-bar-h: 4rem; /* 64px */
+  --width-nav-pill: 20.625rem; /* 330px */
+  --width-form: 19.5rem; /* 312px */
+  --width-welcome: 16.5rem; /* 264px */
+  --spacing-nav-clearance: 5.5rem; /* 88px — espacio sobre navbar fija */
+  --spacing-login-top: var(--space-13);
+  --size-shortcut-circle: 2.875rem; /* 46px — icono atajo */
+  --size-shortcut-glyph: 1.625rem; /* 26px */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-deep: var(--primary-deep);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-tint: var(--primary-tint);
+  --color-primary-surface: var(--primary-surface);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-accent-light: var(--primary-accent-light);
+  --color-tertiary: var(--tertiary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-label: var(--label);
+  --color-charcoal: var(--charcoal);
+  --color-heading: var(--heading);
+  --color-border: var(--border);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-accent: var(--surface-accent);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-info: var(--info);
+  --color-info-surface: var(--info-surface);
+  --color-ink: var(--ink);
+  --color-card-dark-from: var(--card-dark-from);
+  --color-card-dark-to: var(--card-dark-to);
+  --color-on-dark-muted: var(--on-dark-muted);
+  --color-placeholder: var(--placeholder);
+
+  --font-sans: var(--font-family-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --text-display: var(--text-display);
+  --text-display--line-height: var(--text-display--line-height);
+  --text-display--font-weight: var(--text-display--font-weight);
+
+  --text-h2: var(--text-h2);
+  --text-h2--line-height: var(--text-h2--line-height);
+  --text-h2--font-weight: var(--text-h2--font-weight);
+
+  --text-h3: var(--text-h3);
+  --text-h3--line-height: var(--text-h3--line-height);
+  --text-h3--font-weight: var(--text-h3--font-weight);
+
+  --text-body: var(--text-body);
+  --text-body--line-height: var(--text-body--line-height);
+  --text-body--font-weight: var(--text-body--font-weight);
+
+  --text-body-bold: var(--text-body-bold);
+  --text-body-bold--line-height: var(--text-body-bold--line-height);
+  --text-body-bold--font-weight: var(--text-body-bold--font-weight);
+
+  --text-button: var(--text-button);
+  --text-button--line-height: var(--text-button--line-height);
+  --text-button--font-weight: var(--text-button--font-weight);
+
+  --text-button-sm: var(--text-button-sm);
+  --text-button-sm--line-height: var(--text-button-sm--line-height);
+  --text-button-sm--font-weight: var(--text-button-sm--font-weight);
+
+  --text-input: var(--text-input);
+  --text-input--line-height: var(--text-input--line-height);
+  --text-input--font-weight: var(--text-input--font-weight);
+
+  --text-caption: var(--text-caption);
+  --text-caption--line-height: var(--text-caption--line-height);
+  --text-caption--font-weight: var(--text-caption--font-weight);
+
+  --spacing-1: var(--space-1);
+  --spacing-2: var(--space-2);
+  --spacing-3: var(--space-3);
+  --spacing-4: var(--space-4);
+  --spacing-5: var(--space-5);
+  --spacing-6: var(--space-6);
+  --spacing-7: var(--space-7);
+  --spacing-8: var(--space-8);
+  --spacing-9: var(--space-9);
+  --spacing-10: var(--space-10);
+  --spacing-12: var(--space-12);
+  --spacing-13: var(--space-13);
+
+  --radius-input: var(--radius-input);
+  --radius-container-sm: var(--radius-container-sm);
+  --radius-modal: var(--radius-modal);
+  --radius-card: var(--radius-card);
+  --radius-pill: var(--radius-pill);
+
+  --height-touch-min: var(--size-touch-min);
+  --height-button-login: var(--size-button-login);
+  --height-account-card: var(--size-account-card-h);
+  --height-nav-bar: var(--size-nav-bar-h);
+
+  --width-account-card: var(--size-account-card-w);
+  --width-nav-pill: var(--width-nav-pill);
+  --width-form: var(--width-form);
+  --width-welcome: var(--width-welcome);
+
+  --size-shortcut-circle: var(--size-shortcut-circle);
+  --size-shortcut-glyph: var(--size-shortcut-glyph);
+
+  --spacing-nav-clearance: var(--spacing-nav-clearance);
+  --spacing-login-top: var(--spacing-login-top);
+
+  --max-width-container: var(--container-max);
+  --max-width-form: var(--width-form);
+  --max-width-welcome: var(--width-welcome);
+  --max-width-nav-pill: var(--width-nav-pill);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f2f3f7;
+    --foreground: #1a1a1a;
+  }
+}
+
 body {
   position: relative;
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
 }

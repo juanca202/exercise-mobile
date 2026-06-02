@@ -14,7 +14,7 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
-vi.mock("@/components/ui/auth-icon", () => ({
+vi.mock("@/components/ui/AuthIcon", () => ({
   AuthIcon: () => <span data-testid="auth-icon" />,
 }));
 

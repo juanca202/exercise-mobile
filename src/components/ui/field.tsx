@@ -1,22 +1,17 @@
 "use client";
 
 import { Field as BaseField } from "@base-ui/react/field";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
-type FieldProps = {
+type FieldProps = ComponentProps<typeof BaseField.Root> & {
   label: string;
-  name: string;
   children: ReactNode;
-  className?: string;
 };
 
-export function Field({ label, name, children, className = "" }: FieldProps) {
+export function Field({ label, children, className = "", ...props }: FieldProps) {
   return (
-    <BaseField.Root
-      name={name}
-      className={`flex flex-col gap-1.5 ${className}`}
-    >
-      <BaseField.Label className="text-sm font-normal text-[#424242]">
+    <BaseField.Root className={`flex flex-col gap-1 ${className}`} {...props}>
+      <BaseField.Label className="text-body font-medium text-label">
         {label}
       </BaseField.Label>
       {children}

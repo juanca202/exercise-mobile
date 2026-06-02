@@ -33,7 +33,7 @@ describe("Navbar", () => {
     );
   });
 
-  it("routes transfer and secondary items to placeholder in demo", () => {
+  it("routes transfer to transfer hub and secondary items to placeholder", () => {
     render(<Navbar activeItem="home" />);
 
     expect(screen.getByRole("link", { name: /inicio/i })).toHaveAttribute(
@@ -42,8 +42,9 @@ describe("Navbar", () => {
     );
     expect(screen.getByRole("link", { name: /transferir/i })).toHaveAttribute(
       "href",
-      TRANSFER_PATH,
+      "/transfer",
     );
+    expect(TRANSFER_PATH).toBe("/transfer");
     expect(screen.getByRole("link", { name: /retirar/i })).toHaveAttribute(
       "href",
       DEMO_UNAVAILABLE_PATH,

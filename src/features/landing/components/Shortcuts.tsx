@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import { DEMO_UNAVAILABLE_PATH } from "@/shared/routes";
+import { DEMO_UNAVAILABLE_PATH, TRANSFER_PATH } from "@/shared/routes";
 
 import { SectionHeading } from "./SectionHeading";
 
 const FREQUENT_PAYMENTS = [
-  { id: "transfer", label: "Transferencias", href: DEMO_UNAVAILABLE_PATH },
+  { id: "transfer", label: "Transferencias", href: TRANSFER_PATH },
   { id: "services", label: "Servicios", href: DEMO_UNAVAILABLE_PATH },
   { id: "qr", label: "Pagos QR", href: DEMO_UNAVAILABLE_PATH },
 ] as const;

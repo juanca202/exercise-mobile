@@ -9,12 +9,27 @@ export function authenticate(credentials: LoginCredentials): AuthResult {
   const password = credentials.password;
 
   if (!username || !password) {
-    return { success: false, error: "VALIDATION_ERROR" };
+    return {
+      ok: false,
+      error: {
+        code: "VALIDATION",
+        message: "Usuario y contraseña son obligatorios.",
+      },
+    };
   }
 
   if (username === DEMO_USERNAME && password === DEMO_PASSWORD) {
-    return { success: true, session: { username } };
+    return {
+      ok: true,
+      session: { isAuthenticated: true, username },
+    };
   }
 
-  return { success: false, error: "INVALID_CREDENTIALS" };
+  return {
+    ok: false,
+    error: {
+      code: "UNKNOWN",
+      message: "Credenciales incorrectas.",
+    },
+  };
 }

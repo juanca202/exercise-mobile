@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { mockAccounts } from "@/features/landing/lib/mock-data";
+import { getDemoAccounts } from "@/shared/demo/accounts-state";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -12,5 +12,5 @@ export async function GET(request: Request) {
     );
   }
 
-  return NextResponse.json(mockAccounts);
+  return NextResponse.json(getDemoAccounts());
 }

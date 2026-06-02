@@ -10,9 +10,18 @@
 
 **Constitution**: Alineada con `.specify/memory/constitution.md`. Identificadores **BR-XX** y escenarios **SC-XX** definidos en esta feature; dependencias con **US-001** (autenticación) y **US-002** (resumen y atajo a transferencias) documentadas en _Assumptions_.
 
+## Clarifications
+
+### Session 2026-06-01
+
+- Q: ¿Cómo debe el usuario elegir cuenta origen y destino en el paso de ingreso? → A: Mediante un modal tipo bottom sheet «CUENTAS» al pulsar las tarjetas «Desde»/«Hacia», alineado al frame Figma [Change accounts, nodo 1:3077](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-3077&m=dev): título «CUENTAS», cierre con X, lista de cuentas con alias, tipo/número enmascarado, monto y etiqueta «Saldo disponible»; la cuenta elegida queda resaltada; cerrar el modal actualiza la tarjeta correspondiente.
+- Q: ¿Qué frames Figma rigen cada paso del flujo de cuatro etapas? → A: Paso 1 selección de tipo [36:1459](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1459&m=dev); Paso 2 ingreso [36:1794](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1794&m=dev); Paso 3 revisión [1:2920](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2920&m=dev); Paso 4 comprobante [1:2984](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2984&m=dev); modal CUENTAS en paso 2 sigue [1:3077](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-3077&m=dev).
+
 ## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Seleccionar transferencia entre cuentas propias (Priority: P1)
+
+**Design reference (Paso 1)**: [Figma 36:1459 — Selección de tipo](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1459&m=dev)
 
 Como usuario autenticado, quiero elegir el tipo de transferencia «Entre mis cuentas» desde la pantalla de transferencias para iniciar un movimiento inmediato entre mis propias cuentas.
 
@@ -29,6 +38,8 @@ Como usuario autenticado, quiero elegir el tipo de transferencia «Entre mis cue
 
 ### User Story 2 - Ingresar y validar datos de la transferencia (Priority: P1)
 
+**Design reference (Paso 2)**: [Figma 36:1794 — Ingreso](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1794&m=dev); modal cuentas [1:3077](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-3077&m=dev)
+
 Como usuario autenticado, quiero indicar cuenta origen, cuenta destino, monto y concepto opcional para preparar una transferencia entre mis cuentas, con validaciones claras antes de continuar.
 
 **Why this priority**: Captura la información esencial y aplica las reglas de negocio del monto; bloquea transferencias inválidas antes de la confirmación.
@@ -38,15 +49,20 @@ Como usuario autenticado, quiero indicar cuenta origen, cuenta destino, monto y 
 **Acceptance Scenarios** (**SC-02**, **SC-03**, **SC-04**):
 
 1. **Given** un usuario en el paso de ingreso con al menos dos cuentas propias, **When** la pantalla carga, **Then** ve tarjetas de cuenta origen («Desde») y destino («Hacia») con nombre, tipo/número de cuenta y saldo disponible.
-2. **Given** un usuario en el paso de ingreso, **When** ingresa un monto entre $5.00 y $2000.00 inclusive, selecciona cuentas distintas y pulsa «Continuar», **Then** avanza al paso de revisión con los datos capturados.
-3. **Given** un usuario en el paso de ingreso, **When** ingresa un monto menor a $5.00 o mayor a $2000.00, **Then** el sistema no permite continuar y comunica que el monto debe estar entre $5 y $2000.
-4. **Given** un usuario en el paso de ingreso, **When** selecciona la misma cuenta como origen y destino, **Then** el sistema no permite continuar y comunica que origen y destino deben ser distintos.
-5. **Given** un usuario en el paso de ingreso, **When** ingresa un monto superior al saldo disponible de la cuenta origen, **Then** el sistema no permite continuar y comunica saldo insuficiente.
-6. **Given** un usuario en el paso de ingreso, **When** pulsa «Cancelar», **Then** abandona el flujo de ingreso y vuelve a la pantalla de selección de tipo de transferencia sin ejecutar la operación.
+2. **Given** un usuario en el paso de ingreso, **When** pulsa la tarjeta «Desde» o «Hacia», **Then** se abre el modal «CUENTAS» con el listado de cuentas propias elegibles (alias, tipo/número enmascarado, saldo y leyenda «Saldo disponible») según la maqueta Figma nodo 1:3077.
+3. **Given** el modal «CUENTAS» abierto, **When** el usuario selecciona una cuenta de la lista, **Then** el modal se cierra y la tarjeta «Desde» o «Hacia» correspondiente muestra la cuenta elegida con su saldo disponible.
+4. **Given** el modal «CUENTAS» abierto, **When** el usuario pulsa la acción de cerrar (X), **Then** el modal se cierra sin cambiar la selección previa de esa tarjeta.
+5. **Given** un usuario en el paso de ingreso, **When** ingresa un monto entre $5.00 y $2000.00 inclusive, selecciona cuentas distintas y pulsa «Continuar», **Then** avanza al paso de revisión con los datos capturados.
+6. **Given** un usuario en el paso de ingreso, **When** ingresa un monto menor a $5.00 o mayor a $2000.00, **Then** el sistema no permite continuar y comunica que el monto debe estar entre $5 y $2000.
+7. **Given** un usuario en el paso de ingreso, **When** selecciona la misma cuenta como origen y destino, **Then** el sistema no permite continuar y comunica que origen y destino deben ser distintos.
+8. **Given** un usuario en el paso de ingreso, **When** ingresa un monto superior al saldo disponible de la cuenta origen, **Then** el sistema no permite continuar y comunica saldo insuficiente.
+9. **Given** un usuario en el paso de ingreso, **When** pulsa «Cancelar», **Then** abandona el flujo de ingreso y vuelve a la pantalla de selección de tipo de transferencia sin ejecutar la operación.
 
 ---
 
 ### User Story 3 - Revisar y confirmar la transferencia (Priority: P1)
+
+**Design reference (Paso 3)**: [Figma 1:2920 — Revisión](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2920&m=dev)
 
 Como usuario autenticado, quiero revisar un resumen de la transferencia antes de ejecutarla para confirmar monto, cuentas, concepto y comisión.
 
@@ -63,6 +79,8 @@ Como usuario autenticado, quiero revisar un resumen de la transferencia antes de
 ---
 
 ### User Story 4 - Recibir comprobante de transferencia exitosa (Priority: P1)
+
+**Design reference (Paso 4)**: [Figma 1:2984 — Comprobante](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2984&m=dev)
 
 Como usuario autenticado, quiero ver un comprobante claro tras una transferencia exitosa para conservar constancia de la operación y decidir los siguientes pasos.
 
@@ -103,15 +121,18 @@ Como usuario autenticado, quiero llegar al flujo de transferencias desde la nave
 - Concepto vacío u omitido: la transferencia puede continuar; en revisión y comprobante se muestra vacío o texto acordado de «Sin concepto».
 - Fallo al ejecutar la transferencia (error simulado o de servicio): el usuario permanece fuera del comprobante de éxito y recibe un mensaje comprensible con opción de reintentar o cancelar (**SC-12**).
 - Usuario interrumpe el flujo con navegación atrás del navegador: debe poder retomar o salir sin ejecutar transferencia parcial ni mostrar comprobante de éxito sin confirmación explícita.
+- Cuenta con saldo disponible $0.00 en el modal: se muestra en estado no seleccionable (estilo atenuado según maqueta) y no puede elegirse como origen ni destino.
+- Modal «CUENTAS» abierto y el usuario pulsa fuera del panel: comportamiento equivalente a cerrar con X (sin cambiar selección).
 
 ## Requirements _(mandatory)_
 
 ### Functional Requirements
 
 - **FR-001** (**BR-01**): El flujo de transferencia entre cuentas propias MUST estar disponible únicamente para usuarios autenticados según las reglas de US-001.
-- **FR-002** (**BR-02**): El sistema MUST presentar un flujo por pasos con cuatro etapas perceptibles: (1) selección de tipo de transferencia, (2) ingreso de datos, (3) revisión y confirmación, (4) comprobante de éxito.
+- **FR-002** (**BR-02**): El sistema MUST presentar un flujo por pasos con cuatro etapas perceptibles, cada una alineada al frame Figma indicado en _Design & References_: (1) selección de tipo — [36:1459](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1459&m=dev); (2) ingreso de datos — [36:1794](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1794&m=dev); (3) revisión y confirmación — [1:2920](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2920&m=dev); (4) comprobante de éxito — [1:2984](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2984&m=dev).
 - **FR-003** (**BR-03**): En la selección de tipo, el sistema MUST mostrar la opción «Entre mis cuentas» como entrada al flujo de esta feature y MUST mostrar «A terceros» como opción visible acorde a la maqueta; la opción «A terceros» MUST quedar fuera del alcance funcional de esta entrega.
-- **FR-004** (**BR-04**): En el paso de ingreso, el usuario MUST poder ver y seleccionar cuenta origen y cuenta destino entre sus cuentas propias, con nombre, identificador de cuenta y saldo disponible.
+- **FR-004** (**BR-04**): En el paso de ingreso, el usuario MUST poder ver tarjetas «Desde» y «Hacia» con la cuenta seleccionada (nombre, identificador de cuenta y saldo disponible) y MUST abrir un modal «CUENTAS» al pulsar cada tarjeta para elegir cuenta origen o destino entre sus cuentas propias elegibles; el modal MUST seguir el frame Figma [Change accounts (1:3077)](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-3077&m=dev) (título «CUENTAS», cierre, listado con alias, tipo/número enmascarado, importe y «Saldo disponible», estado visual de selección).
+- **FR-004a** (**BR-04**): Al elegir una cuenta en el modal, el sistema MUST cerrar el modal y MUST reflejar la selección en la tarjeta «Desde» o «Hacia» correspondiente; cerrar con X MUST descartar cambios en esa interacción.
 - **FR-005** (**BR-05**): El usuario MUST poder intercambiar cuenta origen y destino desde el paso de ingreso cuando la maqueta lo prevea (acción de invertir cuentas).
 - **FR-006** (**BR-06**): El monto a transferir MUST ser obligatorio y MUST aceptarse solo si está entre $5.00 y $2000.00 inclusive; fuera de ese rango el sistema MUST impedir continuar y MUST informar el rango permitido.
 - **FR-007** (**BR-07**): El concepto MUST ser opcional; si el usuario no lo ingresa, la transferencia puede completarse.
@@ -139,7 +160,7 @@ Como usuario autenticado, quiero llegar al flujo de transferencias desde la nave
 - **SC-001**: El 100 % de los escenarios de aceptación **SC-01** a **SC-12** pueden ejecutarse manualmente o con pruebas automatizadas y obtener el resultado descrito en una sola pasada por escenario en entorno de demo.
 - **SC-002**: Un usuario autenticado completa una transferencia válida entre cuentas propias (desde selección de tipo hasta comprobante) en menos de 3 minutos.
 - **SC-003**: El 100 % de los intentos con monto fuera de [$5, $2000], misma cuenta origen/destino o saldo insuficiente son rechazados antes del paso de revisión, con mensaje comprensible al usuario.
-- **SC-004**: Revisión de las cuatro pantallas del flujo frente a la maqueta Figma: un revisor de producto identifica selección de tipo, ingreso, revisión y comprobante sin ambigüedad estructural.
+- **SC-004**: Revisión de las cuatro pantallas del flujo (nodos Figma 36:1459, 36:1794, 1:2920, 1:2984) y del modal «CUENTAS» (1:3077): un revisor de producto identifica selección de tipo, ingreso, revisión y comprobante sin ambigüedad estructural frente a cada frame de referencia.
 - **SC-005**: Tras una transferencia exitosa simulada, el comprobante muestra número de operación y marca temporal verificables (no vacíos) en el 100 % de las ejecuciones exitosas de prueba.
 
 ## Design & References
@@ -148,7 +169,12 @@ Referencias para planificación, diseño y trazabilidad; no sustituyen los requi
 
 | Tipo                | Referencia                                                                                                    | Uso en esta feature                                                                                          |
 | ------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Figma (archivo)     | [Pantallas taller SDD](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD)              | Maqueta de las cuatro pantallas: TRANSFERENCIAS, TRANSFERIR, REVISAR TRANSFERENCIA y COMPROBANTE             |
+| Figma (archivo)     | [Pantallas taller SDD](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD)              | Archivo maestro del taller                                                                                   |
+| Figma (Paso 1)      | [Selección de tipo — 36:1459](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1459&m=dev) | Pantalla TRANSFERENCIAS; **US-1**, **FR-002**, **FR-003**                                                    |
+| Figma (Paso 2)      | [Ingreso de datos — 36:1794](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=36-1794&m=dev) | Pantalla TRANSFERIR; **US-2**, **FR-004**–**FR-009**                                                         |
+| Figma (Paso 3)      | [Revisión y confirmación — 1:2920](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2920&m=dev) | Pantalla REVISAR TRANSFERENCIA; **US-3**, **FR-010**–**FR-011**                                              |
+| Figma (Paso 4)      | [Comprobante de éxito — 1:2984](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-2984&m=dev) | Pantalla COMPROBANTE; **US-4**, **FR-012**–**FR-013**                                                       |
+| Figma (modal)       | [Change accounts — CUENTAS (1:3077)](https://www.figma.com/design/7pt2W7JSic4ZoAVcgvQ5qD/Pantallas-taller-SDD?node-id=1-3077&m=dev) | Modal en Paso 2; selección origen/destino (**FR-004**, **FR-004a**)                                          |
 | Historia previa     | [US-001 Pantalla de autenticación](../../docs/user-stories/US-001-pantalla-autenticacion/README.md)            | Sesión obligatoria y redirección de visitantes sin sesión                                                    |
 | Historia previa     | [US-002 Landing — resumen de cuentas](../../docs/user-stories/US-002-landing-resumen-cuentas/README.md)       | Atajo desde resumen (**SC-09**) y contexto de cuentas del usuario                                          |
 | Contrato de dominio | [POST `/transfer` — TransferRequest / TransferResponse](../../docs/technical-docs/api-transfer.md)            | Referencia de campos de transferencia para planificación; detalle de implementación fuera del alcance de esta spec |

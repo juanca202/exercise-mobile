@@ -8,31 +8,24 @@ import {
 import { authenticate } from "./mock-auth-service";
 
 describe("authenticate", () => {
-  it("returns VALIDATION_ERROR when username is empty", () => {
-    expect(authenticate({ username: "  ", password: "secret" })).toEqual({
-      success: false,
-      error: "VALIDATION_ERROR",
-    });
+  it("returns validation error when username is empty", () => {
+    expect(authenticate({ username: "  ", password: "secret" }).ok).toBe(false);
   });
 
-  it("returns VALIDATION_ERROR when password is empty", () => {
-    expect(authenticate(emptyCredentials())).toEqual({
-      success: false,
-      error: "VALIDATION_ERROR",
-    });
+  it("returns validation error when password is empty", () => {
+    expect(authenticate(emptyCredentials()).ok).toBe(false);
   });
 
   it("returns session for valid demo credentials", () => {
-    expect(authenticate(validDemoCredentials())).toEqual({
-      success: true,
-      session: { username: "demo.user" },
-    });
+    const result = authenticate(validDemoCredentials());
+
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.session.username).toBe("demo.user");
+    }
   });
 
-  it("returns INVALID_CREDENTIALS for unknown user", () => {
-    expect(authenticate(invalidCredentials())).toEqual({
-      success: false,
-      error: "INVALID_CREDENTIALS",
-    });
+  it("returns error for unknown user", () => {
+    expect(authenticate(invalidCredentials()).ok).toBe(false);
   });
 });

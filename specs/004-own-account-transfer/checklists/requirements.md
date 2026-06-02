@@ -35,4 +35,6 @@
 - Alcance acotado a transferencias «Entre mis cuentas»; «A terceros» visible pero fuera de alcance funcional (**FR-003**, **SC-11**).
 - Rango de monto $5–$2000 documentado en **FR-006** / **BR-06**; validaciones de misma cuenta y saldo insuficiente en **FR-008**, **FR-009**.
 - Contrato POST `/transfer` referenciado solo en _Design & References_ para trazabilidad con documentación técnica existente.
-- Listo para `/speckit-plan` (no se requiere `/speckit-clarify` salvo cambios de producto en alcance de «A terceros» o reglas de comisión).
+- Clarificación 2026-06-01: selección de cuentas vía modal «CUENTAS» (Figma 1:3077); cuentas con saldo $0 no seleccionables.
+- Clarificación 2026-06-01 (nodos): Paso 1 → 36:1459; Paso 2 → 36:1794; Paso 3 → 1:2920; Paso 4 → 1:2984; modal CUENTAS → 1:3077.
+- Actualizar `plan.md` / contratos si difieren de la spec tras nuevas referencias Figma.

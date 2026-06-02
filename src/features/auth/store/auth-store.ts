@@ -24,10 +24,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   login: (credentials) => {
     const result = authenticate(credentials);
 
-    if (result.success) {
-      setSessionCookie(result.session.username);
+    if (result.ok) {
+      setSessionCookie(result.session.username ?? "");
       set({
-        username: result.session.username,
+        username: result.session.username ?? "",
         isAuthenticated: true,
       });
     }

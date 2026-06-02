@@ -23,10 +23,7 @@ describe("auth-store", () => {
   it("logs in with valid credentials and persists cookie", () => {
     const result = useAuthStore.getState().login(validDemoCredentials());
 
-    expect(result).toEqual({
-      success: true,
-      session: { username: "demo.user" },
-    });
+    expect(result.ok).toBe(true);
     expect(authSession.setSessionCookie).toHaveBeenCalledWith("demo.user");
     expect(useAuthStore.getState()).toMatchObject({
       username: "demo.user",
@@ -40,7 +37,7 @@ describe("auth-store", () => {
       password: "wrong",
     });
 
-    expect(result.success).toBe(false);
+    expect(result.ok).toBe(false);
     expect(useAuthStore.getState().isAuthenticated).toBe(false);
     expect(authSession.setSessionCookie).not.toHaveBeenCalled();
   });

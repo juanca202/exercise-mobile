@@ -5,11 +5,7 @@ import {
   AUTH_SESSION_COOKIE,
   hasValidSessionCookie,
 } from "@/features/auth/lib/auth-session";
-import {
-  shouldRedirectToHome,
-  shouldRedirectToLogin,
-} from "@/features/auth/lib/protected-routes";
-import { HOME_PATH, LOGIN_PATH } from "@/shared/routes";
+import { resolveAuthRedirect } from "@/features/auth/lib/auth-redirect";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -17,17 +13,14 @@ export function proxy(request: NextRequest) {
   const cookieValue = rawCookie ? decodeURIComponent(rawCookie) : undefined;
   const hasSession = hasValidSessionCookie(cookieValue);
 
-  if (shouldRedirectToLogin(pathname, hasSession)) {
-    return NextResponse.redirect(new URL(LOGIN_PATH, request.url));
-  }
-
-  if (shouldRedirectToHome(pathname, hasSession)) {
-    return NextResponse.redirect(new URL(HOME_PATH, request.url));
+  const resolution = resolveAuthRedirect(pathname, hasSession);
+  if (resolution.kind === "redirect") {
+    return NextResponse.redirect(new URL(resolution.destination, request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/login", "/demo-unavailable"],
+  matcher: ["/", "/login", "/demo-unavailable", "/transfer", "/transfer/:path*"],
 };

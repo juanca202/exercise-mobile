@@ -13,4 +13,11 @@ describe("protected-routes", () => {
     expect(isProtectedPath("/")).toBe(true);
     expect(isProtectedPath("/login")).toBe(false);
   });
+
+  it("detects transfer flow paths as protected", () => {
+    expect(isProtectedPath("/transfer")).toBe(true);
+    expect(isProtectedPath("/transfer/own")).toBe(true);
+    expect(isProtectedPath("/transfer/own/review")).toBe(true);
+    expect(isProtectedPath("/transfer/own/receipt")).toBe(true);
+  });
 });

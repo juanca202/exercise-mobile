@@ -4,5 +4,16 @@ alwaysApply: true
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+shell commands, and other important information, read the current plan:
+
+**Active feature plan**: `specs/003-landing-account-summary/plan.md`
+
+Key artifacts:
+- Spec: `specs/003-landing-account-summary/spec.md`
+- Research: `specs/003-landing-account-summary/research.md`
+- Data model: `specs/003-landing-account-summary/data-model.md`
+- Quickstart: `specs/003-landing-account-summary/quickstart.md`
+- Contracts: `specs/003-landing-account-summary/contracts/`
+
+Stack (from plan): Next.js 16 App Router, React 19, TypeScript, Tailwind v4, Base UI, Zustand, Vitest. Auth US-001: Zustand + cookie + `proxy.ts` (ADR-008). Landing US-002: `src/features/landing/` + mock `GET /api/accounts` + `GET /api/activity` + `/demo-unavailable`.
 <!-- SPECKIT END -->
